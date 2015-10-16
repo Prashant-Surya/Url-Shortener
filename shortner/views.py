@@ -43,7 +43,10 @@ def home(request):
                 raw = url_temp.encode('utf-8')
                 #hashed = hashlib.md5(raw).hexdigest() 
                 last = Link.objects.last()
-                last_id = last.pk+1
+                try:
+                    last_id = last.pk+1
+                except AttributeError:
+                    last_id = 0
                 #link.save()
                 link.hash = base62_encode(last_id)
                 #link.hash = hashed[0:8]
